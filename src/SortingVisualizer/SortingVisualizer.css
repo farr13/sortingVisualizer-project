@@ -1,0 +1,11 @@
+.array-contain {
+    position: absolute;
+    left: 50px;
+}
+
+.array-bar {
+    width: 15px;
+    background-color: blueviolet;
+    display: inline-block;
+    margin: 0 1px;
+}
