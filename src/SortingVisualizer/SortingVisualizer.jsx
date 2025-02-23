@@ -1,12 +1,23 @@
 import React from 'react';
 import './SortingVisualizer.css';
-import { bubbleSort } from '../SortingAlgorithms/sortingAlgorithms';
+import { bubbleSort } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { quickSort } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { selectionSort } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { insertionSort } from '../SortingAlgorithms/sortingAlgorithms.js';
 
 function randomIntFromInterval(max) {
+    /*
+    This function is used to generate a random integer from 1 - max.
+    :param: int max: The maximum value that can be generated
+    :returns: returns the integer that is generated
+    */
     return Math.floor(Math.random() * max)
 }
 
 export default class SortingVisualizer extends React.Component {
+        /*
+        This class contains the object for the array visualized.
+        */
     constructor(props) {
         super(props);
         
@@ -16,10 +27,20 @@ export default class SortingVisualizer extends React.Component {
     }
 
     componentDidMount() {
+        /*
+        This function calls the resetArray helper anytime the website is loading/reloaded.
+        :param: None
+        :returns: None
+        */
         this.resetArray();
     }
 
     resetArray() {
+        /*
+        This function is used to generate an array of 100 integers from values 0 - 450 in the current state.
+        :param: None
+        :returns: None
+        */
         const array = [];
         for (let i = 0; i < 100; i++) {
             array.push(randomIntFromInterval(450));
@@ -28,34 +49,56 @@ export default class SortingVisualizer extends React.Component {
     }
 
     bubbleSort () {
-        const testArray = this.state.array.sort();
-        const sortedArray = bubbleSort(this.state.array);
-
-        /*This code checks if the arrays are equal to see if the algorithm worked.
-        Aquired code from: https://www.geeksforgeeks.org/how-to-compare-two-arrays-in-javascript/*/
-        if (JSON.stringify(sortedArray) == JSON.stringify(testArray))
-            console.log("True");
-        else
-            console.log("False");
+        /*
+        This function is used to sort the current state array using bubble sort.
+        :param: None
+        :returns: None
+        */
+        console.log("Unsorted: " + this.state.array)
+        bubbleSort(this.state.array);
+        console.log("Sorted: " + this.state.array)
     }
 
-    selectionSort () {}
+    selectionSort () {
+        /*
+        This function is used to sort the current state array using selection sort.
+        :param: None
+        :returns: None
+        */
+        console.log("Unsorted: " + this.state.array)
+        selectionSort(this.state.array);
+        console.log("Sorted: " + this.state.array)
+    }
 
-    quickSort () {}
+    quickSort () {
+        /*
+        This function is used to sort the current state array using quick sort.
+        :param: None
+        :returns: None
+        */
+        console.log("Unsorted: " + this.state.array)
+        quickSort(this.state.array, 0, this.state.array.length - 1)
+        console.log("Sorted: " + this.state.array)
+    }
 
-    insertionSort () {}
-
-    mergeSort () {}
-
-    countingSort () {}
-
-    radixSort () {}
-
-    heapSort () {}
-
-    shellSort () {}
+    insertionSort () {
+        /*
+        This function is used to sort the current state array using insertion sort.
+        :param: None
+        :returns: None
+        */
+        console.log("Unsorted: " + this.state.array)
+        insertionSort(this.state.array, 0, this.state.array.length - 1)
+        console.log("Sorted: " + this.state.array)
+    }
 
     render() {
+        /*
+        This function is renders the ui of the webpage including the sorting buttons, 
+        genereate array button, and the array in terms of a bar graph.
+        :param: None
+        :returns: None
+        */
         const {array} = this.state;
 
         return (
@@ -67,16 +110,10 @@ export default class SortingVisualizer extends React.Component {
                 </div>
               ))}
               <button on onClick={() => this.resetArray()}>Generate New Array</button>
-              <button on onClick={() => this.resetArray()}>Selection Sort</button>  
+              <button on onClick={() => this.selectionSort()}>Selection Sort</button>  
               <button on onClick={() => this.bubbleSort()}>Bubble Sort</button>  
-              <button on onClick={() => this.resetArray()}>Quick Sort</button>  
-              <button on onClick={() => this.resetArray()}>Insertion Sort</button>  
-              <button on onClick={() => this.resetArray()}>Merge Sort</button>  
-              <button on onClick={() => this.resetArray()}>Counting Sort</button>  
-              <button on onClick={() => this.resetArray()}>Radix Sort</button>  
-              <button on onClick={() => this.resetArray()}>Bucket Sort</button>  
-              <button on onClick={() => this.resetArray()}>Heap Sort</button>  
-              <button on onClick={() => this.resetArray()}>Shell Sort</button>      
+              <button on onClick={() => this.quickSort()}>Quick Sort</button>  
+              <button on onClick={() => this.insertionSort()}>Insertion Sort</button>     
             </div>
         );
     }

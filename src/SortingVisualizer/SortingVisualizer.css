@@ -1,9 +1,20 @@
 .array-contain {
+    /*
+    This element class is sets the position of the bar graph displayed on the page.
+    :param: None
+    :returns: None
+    */
     position: absolute;
     left: 50px;
 }
 
 .array-bar {
+    /*
+    This element class is used to set the size, color, 
+    and spacing of each bar inside the bar graph.
+    :param: None
+    :returns: None
+    */
     width: 15px;
     background-color: blueviolet;
     display: inline-block;
