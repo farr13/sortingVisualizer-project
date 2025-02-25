@@ -14,6 +14,7 @@ function randomIntFromInterval(max) {
     return Math.floor(Math.random() * max)
 }
 
+
 export default class SortingVisualizer extends React.Component {
         /*
         This class contains the object for the array visualized.
@@ -25,6 +26,7 @@ export default class SortingVisualizer extends React.Component {
             array: [],
         };
     }
+
 
     componentDidMount() {
         /*
@@ -50,13 +52,22 @@ export default class SortingVisualizer extends React.Component {
 
     bubbleSort () {
         /*
-        This function is used to sort the current state array using bubble sort.
+        This function is used to sort the current state array using bubble sort and 
+        visualizes every step of the sorting algorithm.
         :param: None
         :returns: None
         */
-        console.log("Unsorted: " + this.state.array)
-        bubbleSort(this.state.array);
-        console.log("Sorted: " + this.state.array)
+       let sortingArray = this.state.array
+       let animations = bubbleSort(sortingArray)
+       const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
+       for (let i = 0; i < animations.length; i++) {
+            setTimeout(() => {
+                setTimeout(() => {
+                    arrayBars[animations[i][0][0]].style.height = `${animations[i][1][1]}px`;
+                    arrayBars[animations[i][0][1]].style.height = `${animations[i][1][0]}px`;
+                }, i * 3)
+            }, i * 3)
+       }
     }
 
     selectionSort () {
@@ -100,6 +111,7 @@ export default class SortingVisualizer extends React.Component {
         :returns: None
         */
         const {array} = this.state;
+
 
         return (
             <div className='array-contain'>

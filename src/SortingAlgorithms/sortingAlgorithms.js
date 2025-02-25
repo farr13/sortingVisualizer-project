@@ -1,20 +1,26 @@
+
+
 export const bubbleSort = array => {
     /*
     This function implements the bubbleSort sorting algorithm
     :param: array: An array of integers
-    :returns: Array sorting in ascending order
+    :returns: Nested array containing 2 arrays at each index. the first array containing two 
+    indexes and the second array containing there corresponding values
     */
+   const animations = []
     let size = array.length;
     for (let i = 0; i < size; i++){
         for (let j = 0; j < size - i - 1; j++) {
             if (array[j] > array[j + 1]) {
+                animations.push([[j, j+1], [array[j], array[j+1]]])
                 let temp = array[j]
                 array[j] = array[j+1]
                 array[j+1] = temp
+
             }
         }
     }
-    return;
+    return animations;
 }
 
 export const selectionSort = array => {
