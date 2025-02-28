@@ -1,10 +1,13 @@
 import React from 'react';
 import './SortingVisualizer.css';
-import { bubbleSort } from '../SortingAlgorithms/sortingAlgorithms.js';
-import { quickSort } from '../SortingAlgorithms/sortingAlgorithms.js';
-import { selectionSort } from '../SortingAlgorithms/sortingAlgorithms.js';
-import { insertionSort } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { bubbleSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { quickSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { selectionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
+import { insertionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
 
+export const quick_sort_animations = []
+const ANIMATION_SPEED_MS = 10
+const NUMBER_OF_ARRAY_BARS = 100
 function randomIntFromInterval(max) {
     /*
     This function is used to generate a random integer from 1 - max.
@@ -44,7 +47,7 @@ export default class SortingVisualizer extends React.Component {
         :returns: None
         */
         const array = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
             array.push(randomIntFromInterval(450));
         }
         this.setState({array});
@@ -58,15 +61,13 @@ export default class SortingVisualizer extends React.Component {
         :returns: None
         */
        let sortingArray = this.state.array
-       let animations = bubbleSort(sortingArray)
+       let animations = bubbleSortAlgorithm(sortingArray)
        const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
        for (let i = 0; i < animations.length; i++) {
             setTimeout(() => {
-                setTimeout(() => {
-                    arrayBars[animations[i][0][0]].style.height = `${animations[i][1][1]}px`;
-                    arrayBars[animations[i][0][1]].style.height = `${animations[i][1][0]}px`;
-                }, i * 3)
-            }, i * 3)
+                arrayBars[animations[i][0][0]].style.height = `${animations[i][1][1]}px`;
+                arrayBars[animations[i][0][1]].style.height = `${animations[i][1][0]}px`;
+            }, i * ANIMATION_SPEED_MS)
        }
     }
 
@@ -76,9 +77,15 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
-        console.log("Unsorted: " + this.state.array)
-        selectionSort(this.state.array);
-        console.log("Sorted: " + this.state.array)
+        let sortingArray = this.state.array
+        let animations = selectionSortAlgorithm(sortingArray)
+        const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
+        for (let i = 0; i < animations.length; i++) {
+             setTimeout(() => {
+                arrayBars[animations[i][0][0]].style.height = `${animations[i][1][1]}px`;
+                arrayBars[animations[i][0][1]].style.height = `${animations[i][1][0]}px`;
+             }, i * ANIMATION_SPEED_MS)
+        }
     }
 
     quickSort () {
@@ -87,9 +94,15 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
-        console.log("Unsorted: " + this.state.array)
-        quickSort(this.state.array, 0, this.state.array.length - 1)
-        console.log("Sorted: " + this.state.array)
+        if (quick_sort_animations.length != 0) {quick_sort_animations.length = 0}
+        quickSortAlgorithm(this.state.array, 0, this.state.array.length - 1)
+        const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
+        for (let i = 0; i < quick_sort_animations.length; i++) {
+             setTimeout(() => {
+                arrayBars[quick_sort_animations[i][0][0]].style.height = `${quick_sort_animations[i][1][1]}px`;
+                arrayBars[quick_sort_animations[i][0][1]].style.height = `${quick_sort_animations[i][1][0]}px`;
+             }, i * ANIMATION_SPEED_MS)
+        }
     }
 
     insertionSort () {
@@ -98,9 +111,14 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
-        console.log("Unsorted: " + this.state.array)
-        insertionSort(this.state.array, 0, this.state.array.length - 1)
-        console.log("Sorted: " + this.state.array)
+        let sortingArray = this.state.array
+        let animations = insertionSortAlgorithm(sortingArray)
+        const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
+        for (let i = 0; i < animations.length; i++) {
+             setTimeout(() => {
+                arrayBars[animations[i][0]].style.height = `${animations[i][1]}px`;
+             }, i * ANIMATION_SPEED_MS)
+        }
     }
 
     render() {
