@@ -28,7 +28,15 @@ export default class SortingVisualizer extends React.Component {
         this.state = {
             array: [],
         };
+        this.timeoutIds = []
+        this.isSorting = true;
     }
+
+    stopSorting = () => {
+        this.isSorting = false; // Stop ongoing sorting
+        this.timeoutIds.forEach(clearTimeout); // Clear all pending timeouts
+        this.timeoutIds = []; // Reset timeout list
+    };
 
 
     componentDidMount() {
@@ -46,6 +54,10 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
+        this.isSorting = false;
+        this.stopSorting()
+        this.animations = []
+        quick_sort_animations.length = 0
         const array = [];
         for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
             array.push(randomIntFromInterval(450));
@@ -60,11 +72,18 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
-       let sortingArray = this.state.array
-       let animations = bubbleSortAlgorithm(sortingArray)
-       const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
-       for (let i = 0; i < animations.length; i++) {
-            setTimeout(() => {
+        if (this.isSorting) return; // Prevent multiple sorts at once
+        this.isSorting = true;
+
+        let sortingArray = this.state.array
+        let animations = bubbleSortAlgorithm(sortingArray)
+        const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
+        for (let i = 0; i < animations.length; i++) {
+            this.timeoutID = setTimeout(() => {
+                if (!this.isSorting) {
+                    animations.length = 0
+                    return;
+                } // Stop sorting if canceled
                 arrayBars[animations[i][0][0]].style.height = `${animations[i][1][1]}px`;
                 arrayBars[animations[i][0][1]].style.height = `${animations[i][1][0]}px`;
             }, i * ANIMATION_SPEED_MS)
@@ -77,11 +96,18 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
+        if (this.isSorting) return; // Prevent multiple sorts at once
+        this.isSorting = true;
+
         let sortingArray = this.state.array
         let animations = selectionSortAlgorithm(sortingArray)
         const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
         for (let i = 0; i < animations.length; i++) {
-             setTimeout(() => {
+             this.timeoutID = setTimeout(() => {
+                if (!this.isSorting) {
+                    animations.length = 0
+                    return;
+                } // Stop sorting if canceled
                 arrayBars[animations[i][0][0]].style.height = `${animations[i][1][1]}px`;
                 arrayBars[animations[i][0][1]].style.height = `${animations[i][1][0]}px`;
              }, i * ANIMATION_SPEED_MS)
@@ -94,11 +120,18 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
+        if (this.isSorting) return; // Prevent multiple sorts at once
+        this.isSorting = true;
+
         if (quick_sort_animations.length != 0) {quick_sort_animations.length = 0}
         quickSortAlgorithm(this.state.array, 0, this.state.array.length - 1)
         const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
         for (let i = 0; i < quick_sort_animations.length; i++) {
-             setTimeout(() => {
+             this.timeoutID = setTimeout(() => {
+                if (!this.isSorting) {
+                    animations.length = 0
+                    return;
+                } // Stop sorting if canceled
                 arrayBars[quick_sort_animations[i][0][0]].style.height = `${quick_sort_animations[i][1][1]}px`;
                 arrayBars[quick_sort_animations[i][0][1]].style.height = `${quick_sort_animations[i][1][0]}px`;
              }, i * ANIMATION_SPEED_MS)
@@ -111,11 +144,18 @@ export default class SortingVisualizer extends React.Component {
         :param: None
         :returns: None
         */
+        if (this.isSorting) return; // Prevent multiple sorts at once
+        this.isSorting = true;
+
         let sortingArray = this.state.array
         let animations = insertionSortAlgorithm(sortingArray)
         const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
         for (let i = 0; i < animations.length; i++) {
-             setTimeout(() => {
+             this.timeoutID = setTimeout(() => {
+                if (!this.isSorting) {
+                    animations.length = 0
+                    return;
+                } // Stop sorting if canceled
                 arrayBars[animations[i][0]].style.height = `${animations[i][1]}px`;
              }, i * ANIMATION_SPEED_MS)
         }
