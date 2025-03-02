@@ -6,7 +6,7 @@ import { selectionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.j
 import { insertionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
 
 export const quick_sort_animations = []
-const ANIMATION_SPEED_MS = 10
+const ANIMATION_SPEED_MS = 15
 const NUMBER_OF_ARRAY_BARS = 100
 function randomIntFromInterval(max) {
     /*
