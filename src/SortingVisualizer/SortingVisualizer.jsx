@@ -6,8 +6,8 @@ import { selectionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.j
 import { insertionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
 
 export const quick_sort_animations = []
-const ANIMATION_SPEED_MS = 15
-const NUMBER_OF_ARRAY_BARS = 100
+const ANIMATION_SPEED_MS = 2
+const NUMBER_OF_ARRAY_BARS = 250
 function randomIntFromInterval(max) {
     /*
     This function is used to generate a random integer from 1 - max.

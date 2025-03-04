@@ -34,6 +34,7 @@ export const selectionSortAlgorithm = array => {
     for (let i = 0; i < array.length; i++) {
         let min = i;
         for (let j = i; j < array.length; j++) {
+            animations.push([[i, i], [array[i], array[i]]]);
             if (array[min] > array[j]) {
                 min = j;
             }

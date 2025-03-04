@@ -13,7 +13,7 @@ function App() {
       </head>
       <div className='top-bar'>
         <div class="barCont">
-          <h1>Sorting Visualizer by Farrakhan Abdoualye   Powered By: <a href="https://vite.dev" target="_blank">
+          <h1>Sorting Visualizer by Farrakhan Abdoualye, Powered By: <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a></h1>
         </div>
