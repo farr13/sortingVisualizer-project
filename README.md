@@ -1,6 +1,6 @@
 # Sorting Visualizer
 
-This program is meant to visualize a few sorting algorithms to see in real time the difference in speed on an array of 100 random elements.
+This program is meant to visualize a few sorting algorithms to see in real time the difference in speed on an array of 250 random integer elements.
 
 ## Getting Started
 
