@@ -34,7 +34,7 @@ export const selectionSortAlgorithm = array => {
     for (let i = 0; i < array.length; i++) {
         let min = i;
         for (let j = i; j < array.length; j++) {
-            animations.push([[i, i], [array[i], array[i]]]);
+            animations.push([[0, 0], [array[0], array[0]]]); // Meant to simulate wating for the loop to find the correct value
             if (array[min] > array[j]) {
                 min = j;
             }
@@ -66,6 +66,9 @@ function partition(array, start, end) {
             temp = array[i];
             array[i] = array[j];
             array[j] = temp;
+        }
+        else {
+            quick_sort_animations.push([[0, 0], [array[0], array[0]]]); // Meant to simulate wating for the loop to find the correct value
         }
     }
     i++;

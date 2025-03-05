@@ -20,3 +20,13 @@
     display: inline-block;
     margin: 0 1px;
 }
+
+.stop-watch {
+    position: absolute;
+    width: 300px;
+    border: 15px solid rgb(255, 255, 255);
+    padding: 50px;
+    margin: 20px;
+    top: -300px;
+    right: 50px;
+}

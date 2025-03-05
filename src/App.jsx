@@ -8,11 +8,9 @@ function App() {
 
   return (
     <>
-      <head>
-        <title>Sorting Visualizer</title>
-      </head>
+      <title>Sorting Visualizer</title>
       <div className='top-bar'>
-        <div class="barCont">
+        <div className="barCont">
           <h1>Sorting Visualizer by Farrakhan Abdoualye, Powered By: <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a></h1>

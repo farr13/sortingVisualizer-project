@@ -5,9 +5,10 @@ import { quickSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
 import { selectionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
 import { insertionSortAlgorithm } from '../SortingAlgorithms/sortingAlgorithms.js';
 
-export const quick_sort_animations = []
+export let quick_sort_animations = []
 const ANIMATION_SPEED_MS = 2
 const NUMBER_OF_ARRAY_BARS = 250
+
 function randomIntFromInterval(max) {
     /*
     This function is used to generate a random integer from 1 - max.
@@ -26,16 +27,15 @@ export default class SortingVisualizer extends React.Component {
         super(props);
         
         this.state = {
-            array: [],
+            array: []
         };
-        this.timeoutIds = []
+        this.timeoutID;
         this.isSorting = true;
     }
 
     stopSorting = () => {
         this.isSorting = false; // Stop ongoing sorting
-        this.timeoutIds.forEach(clearTimeout); // Clear all pending timeouts
-        this.timeoutIds = []; // Reset timeout list
+        clearTimeout(this.timeoutID);
     };
 
 
@@ -55,9 +55,8 @@ export default class SortingVisualizer extends React.Component {
         :returns: None
         */
         this.isSorting = false;
-        this.stopSorting()
-        this.animations = []
-        quick_sort_animations.length = 0
+        this.stopSorting();
+        quick_sort_animations.length = 0;
         const array = [];
         for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
             array.push(randomIntFromInterval(450));
@@ -101,6 +100,7 @@ export default class SortingVisualizer extends React.Component {
 
         let sortingArray = this.state.array
         let animations = selectionSortAlgorithm(sortingArray)
+        let i = 0
         const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
         for (let i = 0; i < animations.length; i++) {
              this.timeoutID = setTimeout(() => {
@@ -169,21 +169,24 @@ export default class SortingVisualizer extends React.Component {
         :returns: None
         */
         const {array} = this.state;
-
-
+        const sorting = this.isSorting;
+        let d = new Date();
         return (
             <div className='array-contain'>
               {array.map((value, idx) => (
                 <div className='array-bar' 
-                key={idx}
-                style={{height: `${value}px`}}>
+                    key={idx}
+                    style={{height: `${value}px`}}>
                 </div>
               ))}
-              <button on onClick={() => this.resetArray()}>Generate New Array</button>
-              <button on onClick={() => this.selectionSort()}>Selection Sort</button>  
-              <button on onClick={() => this.bubbleSort()}>Bubble Sort</button>  
-              <button on onClick={() => this.quickSort()}>Quick Sort</button>  
-              <button on onClick={() => this.insertionSort()}>Insertion Sort</button>     
+              <button onClick={() => this.resetArray()}>Generate New Array</button>
+              <button onClick={() => this.selectionSort()}>Selection Sort</button>  
+              <button onClick={() => this.bubbleSort()}>Bubble Sort</button>  
+              <button onClick={() => this.quickSort()}>Quick Sort</button>  
+              <button onClick={() => this.insertionSort()}>Insertion Sort</button>
+              <div className='stop-watch'>
+                0:00:00:00
+              </div>   
             </div>
         );
     }
