@@ -143,7 +143,7 @@ export default class SortingVisualizer extends React.Component {
         let animations = insertionSortAlgorithm(sortingArray)
         const arrayBars = Array.from(document.getElementsByClassName('array-bar'));
         for (let i = 0; i < animations.length; i++) {
-             timeoutID = setTimeout(() => {
+             let timeoutID = setTimeout(() => {
                 if (!this.isSorting) return;
                 arrayBars[animations[i][0]].style.height = `${animations[i][1]}px`;
              }, i * ANIMATION_SPEED_MS)
