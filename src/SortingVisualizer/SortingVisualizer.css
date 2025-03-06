@@ -30,3 +30,7 @@
     top: -300px;
     right: 50px;
 }
+
+.timer {
+    position: relative;
+}
