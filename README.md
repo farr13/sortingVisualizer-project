@@ -23,11 +23,6 @@ For more commands
 Farrakhan Abdoulaye  
 [@LinkedIn]([https://twitter.com/dompizzie](https://www.linkedin.com/in/farrakhan-abdoulaye-b019ab267/))
 
-## Version History
-
-* 0.1
-    * Initial Release
-
 ## License
 
 MIT License
