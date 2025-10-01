@@ -6,10 +6,10 @@ This program is meant to visualize a few sorting algorithms to see in real time 
 
 ### Dependencies
 
-Windows 10, NPM, Node JS
+Windows 10, NPM, Node JS, Vite
 
 ### Executing program
-
+* Type into terminal : npm install vite
 * Type into terminal : npm run dev
 * Hit on keyboard : Enter + o
 
